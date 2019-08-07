@@ -1462,6 +1462,92 @@ CREATE OR REPLACE PACKAGE BODY UT_UTILXML AS
     dbms_lob.freetemporary(c_lob2);
   END getValueLarge_01;
 
+  PROCEDURE updateTextNode_01 IS
+    xml XMLTYPE;
+    valueNode VARCHAR2(4000);
+    tNamespaces UTILXML.T_NAMESPACES  := UTILXML.T_NAMESPACES();
+  BEGIN
+    xml := XMLTYPE('<a:FATHER xmlns:a="http://a/" xmlns:b="http://b/"><b:CHILD><COLUMN1>1234</COLUMN1><COLUMN2>A</COLUMN2></b:CHILD></a:FATHER>');
+
+    tNamespaces.EXTEND(2);
+    tNamespaces(1).PREFIX := 'xmlns';
+    tNamespaces(1).NAMESPACE := 'a';
+    tNamespaces(1).VALUE := 'http://a/';
+    tNamespaces(2).PREFIX := 'xmlns';
+    tNamespaces(2).NAMESPACE := 'b';
+    tNamespaces(2).VALUE := 'http://b/';
+
+    utilxml.updateTextNode(
+                  xml,
+                  '/a:FATHER/b:CHILD/COLUMN1/text()',
+                  'Hello World',
+                  tNamespaces);
+
+    ut.expect(INSTR(xml.getClobVal(),'<COLUMN1>Hello World</COLUMN1>')).to_be_greater_than(0);
+  END updateTextNode_01;
+
+  PROCEDURE updateTextNode_02 IS
+    xml XMLTYPE;
+    valueNode VARCHAR2(4000);
+    tNamespaces UTILXML.T_NAMESPACES  := UTILXML.T_NAMESPACES();
+  BEGIN
+    xml := XMLTYPE('<a:FATHER xmlns:a="http://a/" xmlns:b="http://b/"><b:CHILD><COLUMN1>1234</COLUMN1><COLUMN2>A</COLUMN2></b:CHILD></a:FATHER>');
+
+    tNamespaces.EXTEND(2);
+    tNamespaces(1).PREFIX := 'xmlns';
+    tNamespaces(1).NAMESPACE := 'a';
+    tNamespaces(1).VALUE := 'http://a/';
+    tNamespaces(2).PREFIX := 'xmlns';
+    tNamespaces(2).NAMESPACE := 'b';
+    tNamespaces(2).VALUE := 'http://b/';
+
+    utilxml.updateTextNode(
+                  xml,
+                  '/a:FATHER/b:CHILD/COLUMN1',
+                  'Hello World',
+                  tNamespaces);
+
+    ut.expect(INSTR(xml.getClobVal(),'<COLUMN1>Hello World</COLUMN1>')).to_be_greater_than(0);
+  END updateTextNode_02;
+
+  PROCEDURE updateTextNode_03 IS
+    xml XMLTYPE;
+    valueNode VARCHAR2(4000);
+    tNamespaces UTILXML.T_NAMESPACES  := UTILXML.T_NAMESPACES();
+  BEGIN
+    xml := XMLTYPE('<a:FATHER xmlns:a="http://a/" xmlns:b="http://b/"><b:CHILD><COLUMN1>1234</COLUMN1><COLUMN2>A</COLUMN2></b:CHILD></a:FATHER>');
+
+    tNamespaces.EXTEND(2);
+    tNamespaces(1).PREFIX := 'xmlns';
+    tNamespaces(1).NAMESPACE := 'a';
+    tNamespaces(1).VALUE := 'http://a/';
+    tNamespaces(2).PREFIX := 'xmlns';
+    tNamespaces(2).NAMESPACE := 'b';
+    tNamespaces(2).VALUE := 'http://b/';
+
+    utilxml.updateTextNode(
+                  xml,
+                  '/a:FATHER/b:CHILD/COLUMNNNNNN/text()',
+                  'Hello World',
+                  tNamespaces);
+
+    ut.expect(INSTR(xml.getClobVal(),'<COLUMN1>Hello World</COLUMN1>')).to_equal(0);
+  END updateTextNode_03;
+
+  PROCEDURE updateTextNode_04 IS
+    xml XMLTYPE;
+    valueNode VARCHAR2(4000);
+  BEGIN
+    xml := XMLTYPE('<FATHER><CHILD><COLUMN1>1234</COLUMN1><COLUMN2>A</COLUMN2></CHILD></FATHER>');
+    utilxml.updateTextNode(
+                  xml,
+                  '/FATHER/CHILD/COLUMN1/text()',
+                  'Hello World');
+
+    ut.expect(INSTR(xml.getClobVal(),'<COLUMN1>Hello World</COLUMN1>')).to_be_greater_than(0);
+  END updateTextNode_04;
+
+
 
 END UT_UTILXML;
 /

@@ -758,7 +758,28 @@ CREATE OR REPLACE PACKAGE BODY UTILXML AS
 
   END getValueLarge;
 
+  PROCEDURE updateTextNode(xml IN OUT NOCOPY XMLTYPE,
+                          pathNode VARCHAR2,
+                          text VARCHAR2,
+                          tNameSpaces T_NAMESPACES := NULL) IS
+    nameSpace VARCHAR2(4000);
+    pathNodeFinal VARCHAR2(4000);
+  BEGIN
+    --namespace for EXTRACTVALUE -> is a string literal
+    nameSpace := getNameSpaceString(tNameSpaces);
 
+    pathNodeFinal := pathNode;
+    IF INSTR(pathNodeFinal, '/text()') = 0 THEN
+      pathNodeFinal := pathNodeFinal || '/text()';
+    END IF;
+
+    IF XMLTYPE.existsNode(xml, pathNodeFinal, nameSpace) = 1 THEN
+      SELECT UPDATEXML(xml, pathNodeFinal, text, nameSpace)
+      INTO xml
+      FROM DUAL;
+    END IF;
+
+  END updateTextNode;
 
 
 

@@ -207,6 +207,18 @@ CREATE OR REPLACE PACKAGE UT_UTILXML AS
   --%test(getValueLarge (xmltype) - 01 -> Value of node clob)
   PROCEDURE getValueLarge_01;
 
+  --%test(updateTextNode (xmltype) - 01 -> Update text node)
+  PROCEDURE updateTextNode_01;
+
+  --%test(updateTextNode (xmltype) - 02 -> Update text node without text)
+  PROCEDURE updateTextNode_02;
+
+  --%test(updateTextNode (xmltype) - 03 -> node not exists)
+  PROCEDURE updateTextNode_03;
+
+  --%test(updateTextNode (xmltype) - 04 -> Update text node without namespace)
+  PROCEDURE updateTextNode_04;
+
 END UT_UTILXML;
 /
 SHOW ERRORS

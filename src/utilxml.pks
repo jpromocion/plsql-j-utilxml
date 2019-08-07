@@ -354,7 +354,7 @@ CREATE OR REPLACE PACKAGE UTILXML AS
     * @param value
     * @param tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.
     */
-   PROCEDURE createAttribute(xml IN OUT XMLTYPE,
+   PROCEDURE createAttribute(xml IN OUT NOCOPY XMLTYPE,
                              pathNode VARCHAR2,
                              nameAtt VARCHAR2,
                              value VARCHAR2,
@@ -369,7 +369,7 @@ CREATE OR REPLACE PACKAGE UTILXML AS
     * @param xmlNode Will be child node
     * @param tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.
     */
-   PROCEDURE addNodeXmltype(xml IN OUT XMLTYPE,
+   PROCEDURE addNodeXmltype(xml IN OUT NOCOPY XMLTYPE,
                             pathDadNode VARCHAR2,
                             nameNode VARCHAR2,
                             xmlNode XMLTYPE,
@@ -443,6 +443,19 @@ CREATE OR REPLACE PACKAGE UTILXML AS
                          nameNode VARCHAR2,
                          tNameSpaces T_NAMESPACES := NULL)
   RETURN CLOB;
+
+  /**
+   * Update text value of node exists
+   * @param xml xml source and destination
+   * @param pathDadNode  Name and path for node -> XQuery.
+   *      -Example node: "/n:NODE_A/NODE_B/NODE_C"
+   * @param text New text value
+   * @param tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.*
+   */
+  PROCEDURE updateTextNode(xml IN OUT NOCOPY XMLTYPE,
+                          pathNode VARCHAR2,
+                          text VARCHAR2,
+                          tNameSpaces T_NAMESPACES := NULL);
 
 
 
