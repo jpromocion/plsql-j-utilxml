@@ -1,0 +1,1383 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE APPLICATION SYSTEM "application.dtd">
+<APPLICATION NAME="plsql-j-utilxml">
+  <PACKAGE_BODY NAME="UTILXML" SCHEMA="">
+    <FUNCTION NAME="GETNAMESPACESTRING">
+      <COMMENT_FIRST_LINE><![CDATA[ Return literal string of namespace
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return literal string of namespace
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace.]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Literal namespace string]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace.]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Literal namespace string]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="25" END_LINE="27" LINES="14" START_COLUMN="12" START_LINE="14"/>
+    </FUNCTION>
+    <PROCEDURE NAME="ADDNAMESPACEXMLTABLE">
+      <COMMENT_FIRST_LINE><![CDATA[ For a XMLTABLE select, add namespace information
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ For a XMLTABLE select, add namespace information
+]]></COMMENT>
+      <ARGUMENT MODE="IN OUT" NAME="SQLSELECT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Buildinf select. It will be completed]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[sqlSelect Buildinf select. It will be completed]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL.]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="27" END_LINE="52" LINES="19" START_COLUMN="13" START_LINE="34"/>
+    </PROCEDURE>
+    <FUNCTION NAME="ESCAPEDSTRINGXML">
+      <COMMENT_FIRST_LINE><![CDATA[******************************************************************************
+******************** GENERAL USE *********************************
+******************************************************************************
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[******************************************************************************
+******************** GENERAL USE *********************************
+******************************************************************************
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="VARCHAR2"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="23" END_LINE="64" LINES="5" START_COLUMN="12" START_LINE="60"/>
+    </FUNCTION>
+    <FUNCTION NAME="ESCAPEDSTRINGXML">
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="CLOB"/>
+      <RETURN TYPE="CLOB"/>
+      <SUMMARY END_COLUMN="23" END_LINE="70" LINES="5" START_COLUMN="12" START_LINE="66"/>
+    </FUNCTION>
+    <FUNCTION NAME="UNESCAPEDSTRINGXML">
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="VARCHAR2"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="25" END_LINE="76" LINES="5" START_COLUMN="12" START_LINE="72"/>
+    </FUNCTION>
+    <FUNCTION NAME="UNESCAPEDSTRINGXML">
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="CLOB"/>
+      <RETURN TYPE="CLOB"/>
+      <SUMMARY END_COLUMN="25" END_LINE="82" LINES="5" START_COLUMN="12" START_LINE="78"/>
+    </FUNCTION>
+    <FUNCTION NAME="NEWDOMDOCUMENT">
+      <COMMENT_FIRST_LINE><![CDATA[ Create new DOMDocument without root node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create new DOMDocument without root node
+]]></COMMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="22" END_LINE="104" LINES="11" START_COLUMN="13" START_LINE="94"/>
+    </FUNCTION>
+    <FUNCTION NAME="STRINGTODOMDOCUMENT">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="VARCHAR2"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <SUMMARY END_COLUMN="26" END_LINE="117" LINES="11" START_COLUMN="12" START_LINE="107"/>
+    </FUNCTION>
+    <FUNCTION NAME="STRINGTODOMDOCUMENT">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="CLOB"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <SUMMARY END_COLUMN="26" END_LINE="129" LINES="11" START_COLUMN="12" START_LINE="119"/>
+    </FUNCTION>
+    <FUNCTION NAME="CREATENODE">
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <SUMMARY END_COLUMN="17" END_LINE="146" LINES="16" START_COLUMN="12" START_LINE="131"/>
+    </FUNCTION>
+    <FUNCTION NAME="CREATETEXTNODE">
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="TEXT" TYPE="VARCHAR2"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <SUMMARY END_COLUMN="21" END_LINE="168" LINES="21" START_COLUMN="12" START_LINE="148"/>
+    </FUNCTION>
+    <PROCEDURE NAME="CREATEATTRIBUTE">
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <ARGUMENT MODE="IN" NAME="NAME" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="VALUE" TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="22" END_LINE="177" LINES="8" START_COLUMN="13" START_LINE="170"/>
+    </PROCEDURE>
+    <FUNCTION NAME="ADDNODEXMLTYPE">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <ARGUMENT MODE="IN" NAME="XMLNODE" TYPE="XMLTYPE"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <SUMMARY END_COLUMN="21" END_LINE="201" LINES="23" START_COLUMN="12" START_LINE="179"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETROOT">
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMELEMENT"/>
+      <SUMMARY END_COLUMN="14" END_LINE="210" LINES="8" START_COLUMN="12" START_LINE="203"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODELIST">
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODELIST"/>
+      <SUMMARY END_COLUMN="18" END_LINE="228" LINES="17" START_COLUMN="12" START_LINE="212"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODELIST">
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODELIST"/>
+      <SUMMARY END_COLUMN="18" END_LINE="242" LINES="13" START_COLUMN="12" START_LINE="230"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODE">
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <SUMMARY END_COLUMN="14" END_LINE="256" LINES="13" START_COLUMN="12" START_LINE="244"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODE">
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <SUMMARY END_COLUMN="14" END_LINE="277" LINES="20" START_COLUMN="12" START_LINE="258"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETATTRIBUTE">
+      <ARGUMENT MODE="IN" NAME="DOMELEMENT" TYPE="DBMS_XMLDOM.DOMELEMENT"/>
+      <ARGUMENT MODE="IN" NAME="NAMEATT" TYPE="VARCHAR2"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="19" END_LINE="284" LINES="6" START_COLUMN="12" START_LINE="279"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETATTRIBUTE">
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <ARGUMENT MODE="IN" NAME="NAMEATT" TYPE="VARCHAR2"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="19" END_LINE="303" LINES="18" START_COLUMN="12" START_LINE="286"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNAME">
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="14" END_LINE="312" LINES="8" START_COLUMN="12" START_LINE="305"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUE">
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="15" END_LINE="326" LINES="13" START_COLUMN="12" START_LINE="314"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUECDATA">
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <RETURN TYPE="CLOB"/>
+      <SUMMARY END_COLUMN="20" END_LINE="365" LINES="38" START_COLUMN="12" START_LINE="328"/>
+    </FUNCTION>
+    <FUNCTION NAME="DOMDOCUMENTTOXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[******************************************************************************
+******************** USE XMLTYPE *******************************************
+******************************************************************************
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[******************************************************************************
+******************** USE XMLTYPE *******************************************
+******************************************************************************
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <RETURN TYPE="XMLTYPE"/>
+      <SUMMARY END_COLUMN="27" END_LINE="385" LINES="11" START_COLUMN="12" START_LINE="375"/>
+    </FUNCTION>
+    <FUNCTION NAME="XMLTYPETOCLOB">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <RETURN TYPE="CLOB"/>
+      <SUMMARY END_COLUMN="20" END_LINE="391" LINES="5" START_COLUMN="12" START_LINE="387"/>
+    </FUNCTION>
+    <FUNCTION NAME="CLOBTOXMLTYPE">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="CLOB"/>
+      <RETURN TYPE="XMLTYPE"/>
+      <SUMMARY END_COLUMN="20" END_LINE="397" LINES="5" START_COLUMN="12" START_LINE="393"/>
+    </FUNCTION>
+    <FUNCTION NAME="SELECTTOXMLTYPE">
+      <ARGUMENT MODE="IN" NAME="SELECTSQL" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="NAMECONTAINERNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="NAMEROWNODE" TYPE="VARCHAR2"/>
+      <RETURN TYPE="XMLTYPE"/>
+      <SUMMARY END_COLUMN="22" END_LINE="417" LINES="19" START_COLUMN="12" START_LINE="399"/>
+    </FUNCTION>
+    <FUNCTION NAME="SELECTTOXMLTYPE">
+      <ARGUMENT MODE="IN" NAME="TABLENAME" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="WHERECLAUSE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMECONTAINERNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMEROWNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="TCOLUMNSNODES" TYPE="T_COLUMNSNODES"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TCOLUMNSATTRIBUTES" TYPE="T_COLUMNSATTRIBUTES"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TCOLUMNSORDER" TYPE="T_COLUMNSNODES"/>
+      <RETURN TYPE="XMLTYPE"/>
+      <SUMMARY END_COLUMN="22" END_LINE="487" LINES="69" START_COLUMN="12" START_LINE="419"/>
+    </FUNCTION>
+    <FUNCTION NAME="FORMATXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Format indent XML
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Format indent XML
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="2" MODE="IN" NAME="IDENTSIZE" TYPE="PLS_INTEGER"/>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="20" END_LINE="503" LINES="10" START_COLUMN="12" START_LINE="494"/>
+    </FUNCTION>
+    <PROCEDURE NAME="CREATENODE">
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHDADNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <SUMMARY END_COLUMN="17" END_LINE="531" LINES="27" START_COLUMN="13" START_LINE="505"/>
+    </PROCEDURE>
+    <PROCEDURE NAME="CREATETEXTNODE">
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHDADNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="TEXT" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <SUMMARY END_COLUMN="21" END_LINE="558" LINES="26" START_COLUMN="13" START_LINE="533"/>
+    </PROCEDURE>
+    <PROCEDURE NAME="CREATEATTRIBUTE">
+      <ARGUMENT MODE="IN OUT" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMEATT" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="VALUE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <SUMMARY END_COLUMN="22" END_LINE="578" LINES="19" START_COLUMN="13" START_LINE="560"/>
+    </PROCEDURE>
+    <PROCEDURE NAME="ADDNODEXMLTYPE">
+      <ARGUMENT MODE="IN OUT" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHDADNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="XMLNODE" TYPE="XMLTYPE"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <SUMMARY END_COLUMN="21" END_LINE="598" LINES="19" START_COLUMN="13" START_LINE="580"/>
+    </PROCEDURE>
+    <FUNCTION NAME="GETNODE">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <RETURN TYPE="XMLTYPE"/>
+      <SUMMARY END_COLUMN="14" END_LINE="618" LINES="19" START_COLUMN="12" START_LINE="600"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODELIST">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="LISTCOLUMNS" TYPE="T_NODES"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <RETURN TYPE="SYS_REFCURSOR"/>
+      <SUMMARY END_COLUMN="18" END_LINE="676" LINES="57" START_COLUMN="12" START_LINE="620"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETATTRIBUTE">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHATT" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="19" END_LINE="699" LINES="20" START_COLUMN="12" START_LINE="680"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUE">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <RETURN TYPE="VARCHAR2"/>
+      <SUMMARY END_COLUMN="15" END_LINE="726" LINES="26" START_COLUMN="12" START_LINE="701"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUELARGE">
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHFATHERNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <RETURN TYPE="CLOB"/>
+      <SUMMARY END_COLUMN="20" END_LINE="754" LINES="27" START_COLUMN="12" START_LINE="728"/>
+    </FUNCTION>
+    <PROCEDURE NAME="UPDATETEXTNODE">
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE"/>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="TEXT" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES"/>
+      <SUMMARY END_COLUMN="21" END_LINE="777" LINES="22" START_COLUMN="13" START_LINE="756"/>
+    </PROCEDURE>
+    <SUMMARY END_COLUMN="12" END_LINE="781" LINES="781" START_COLUMN="32" START_LINE="1"/>
+  </PACKAGE_BODY>
+  <PACKAGE NAME="UTILXML" SCHEMA="">
+    <TYPE NAME="T_NAMESPACE">
+      <COMMENT_FIRST_LINE><![CDATA[Type for save pair: namespace / value namespace
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Type for save pair: namespace / value namespace
+]]></COMMENT>
+      <FIELD NAME="PREFIX" TYPE="VARCHAR(500)"/>
+      <FIELD NAME="NAMESPACE" TYPE="VARCHAR(500)"/>
+      <FIELD NAME="VALUE" TYPE="VARCHAR(4000)"/>
+      <RETURN TYPE="RECORD"/>
+    </TYPE>
+    <TYPE NAME="T_NAMESPACES">
+      <COMMENT_FIRST_LINE><![CDATA[Table save name spaces of xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Table save name spaces of xml
+]]></COMMENT>
+      <RETURN TYPE="TABLE OF T_NAMESPACE"/>
+    </TYPE>
+    <TYPE NAME="T_NODE">
+      <COMMENT_FIRST_LINE><![CDATA[Type for save pair: node xml / type
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Type for save pair: node xml / type
+]]></COMMENT>
+      <FIELD NAME="NAME" TYPE="VARCHAR(30)"/>
+      <FIELD DEFAULT="'VARCHAR2(4000)'" NAME="TYPEDATA" TYPE="VARCHAR(500)"/>
+      <RETURN TYPE="RECORD"/>
+    </TYPE>
+    <TYPE NAME="T_NODES">
+      <COMMENT_FIRST_LINE><![CDATA[Table save list child nodes for extract value
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Table save list child nodes for extract value
+]]></COMMENT>
+      <RETURN TYPE="TABLE OF T_NODE INDEX BY PLS_INTEGER"/>
+    </TYPE>
+    <TYPE NAME="T_DATATABLE">
+      <COMMENT_FIRST_LINE><![CDATA[Type data table for represent xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Type data table for represent xml
+]]></COMMENT>
+      <FIELD NAME="NAMECOLUMN" TYPE="VARCHAR(30)"/>
+      <FIELD NAME="NAMEXML" TYPE="VARCHAR(500)"/>
+      <RETURN TYPE="RECORD"/>
+    </TYPE>
+    <TYPE NAME="T_COLUMNSNODES">
+      <COMMENT_FIRST_LINE><![CDATA[Table save list columns of table for represent xml like node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Table save list columns of table for represent xml like node
+]]></COMMENT>
+      <RETURN TYPE="TABLE OF T_DATATABLE"/>
+    </TYPE>
+    <TYPE NAME="T_COLUMNSATTRIBUTES">
+      <COMMENT_FIRST_LINE><![CDATA[Table save list columns of table for represent xml like attribute
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[Table save list columns of table for represent xml like attribute
+]]></COMMENT>
+      <RETURN TYPE="TABLE OF T_DATATABLE"/>
+    </TYPE>
+    <FUNCTION NAME="ESCAPEDSTRINGXML">
+      <COMMENT_FIRST_LINE><![CDATA[ Data escaped to XML equivalent
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Data escaped to XML equivalent
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[String to escaped]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[String escaped]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[string String to escaped]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[String escaped]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="46" LINES="2" START_COLUMN="12" START_LINE="45"/>
+    </FUNCTION>
+    <FUNCTION NAME="ESCAPEDSTRINGXML">
+      <COMMENT_FIRST_LINE><![CDATA[ Data escaped to XML equivalent
+ NOTE: Overload with CLOB
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Data escaped to XML equivalent
+ NOTE: Overload with CLOB
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="CLOB">
+        <COMMENT><![CDATA[String to escaped]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="CLOB">
+        <COMMENT><![CDATA[String escaped]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[string String to escaped]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[String escaped]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="14" END_LINE="55" LINES="2" START_COLUMN="12" START_LINE="54"/>
+    </FUNCTION>
+    <FUNCTION NAME="UNESCAPEDSTRINGXML">
+      <COMMENT_FIRST_LINE><![CDATA[ Data unescaped from XML equivalent
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Data unescaped from XML equivalent
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[String escaped]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[String unescaped]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[string String escaped]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[String unescaped]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="63" LINES="2" START_COLUMN="12" START_LINE="62"/>
+    </FUNCTION>
+    <FUNCTION NAME="UNESCAPEDSTRINGXML">
+      <COMMENT_FIRST_LINE><![CDATA[ Data unescaped from XML equivalent
+ NOTE: Overload with CLOB
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Data unescaped from XML equivalent
+ NOTE: Overload with CLOB
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="STRING" TYPE="CLOB">
+        <COMMENT><![CDATA[String escaped]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="CLOB">
+        <COMMENT><![CDATA[String unescaped]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[string String escaped]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[String unescaped]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="14" END_LINE="72" LINES="2" START_COLUMN="12" START_LINE="71"/>
+    </FUNCTION>
+    <FUNCTION NAME="NEWDOMDOCUMENT">
+      <COMMENT_FIRST_LINE><![CDATA[ Create new DOMDocument without root node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create new DOMDocument without root node
+]]></COMMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="34" END_LINE="86" LINES="2" START_COLUMN="13" START_LINE="85"/>
+    </FUNCTION>
+    <FUNCTION NAME="STRINGTODOMDOCUMENT">
+      <COMMENT_FIRST_LINE><![CDATA[ Parse Xml in string to DOMDocument xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Parse Xml in string to DOMDocument xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[String xml]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml String xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="33" END_LINE="94" LINES="2" START_COLUMN="12" START_LINE="93"/>
+    </FUNCTION>
+    <FUNCTION NAME="STRINGTODOMDOCUMENT">
+      <COMMENT_FIRST_LINE><![CDATA[ Parse Xml in clob string to DOMDocument xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Parse Xml in clob string to DOMDocument xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="CLOB">
+        <COMMENT><![CDATA[Clob string xml]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml Clob string xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[new DOMDocument xml]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="33" END_LINE="103" LINES="2" START_COLUMN="12" START_LINE="102"/>
+    </FUNCTION>
+    <FUNCTION NAME="CREATENODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Create new Node in xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create new Node in xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Father node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name new node]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[DOMDocument xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[dadNode Father node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Name new node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="29" END_LINE="115" LINES="4" START_COLUMN="12" START_LINE="112"/>
+    </FUNCTION>
+    <FUNCTION NAME="CREATETEXTNODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Create new Node in xml with text value
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create new Node in xml with text value
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[DOMDocument xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Father node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name new node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="TEXT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Text value]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document DOMDocument xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[dadNode Father node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Name new node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[text Text value]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="29" END_LINE="129" LINES="5" START_COLUMN="12" START_LINE="125"/>
+    </FUNCTION>
+    <PROCEDURE NAME="CREATEATTRIBUTE">
+      <COMMENT_FIRST_LINE><![CDATA[ Create atrribute in node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create atrribute in node
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Node where add attribute]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAME" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Attribute name]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="VALUE" TYPE="VARCHAR2"/>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[node Node where add attribute]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[name Attribute name]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[value]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="44" END_LINE="141" LINES="3" START_COLUMN="13" START_LINE="139"/>
+    </PROCEDURE>
+    <FUNCTION NAME="ADDNODEXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Add a node of structure XMLTYPE like child node in a DomDOcument xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Add a node of structure XMLTYPE like child node in a DomDOcument xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Father node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="XMLNODE" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[Will be child node]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Child node create]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document DOMDocument xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[dadNode Father node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xmlNode Will be child node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Child node create]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="29" END_LINE="153" LINES="4" START_COLUMN="12" START_LINE="150"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETROOT">
+      <COMMENT_FIRST_LINE><![CDATA[ Return root element of DOMDocument xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return root element of DOMDocument xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[DOMDocument xml]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMELEMENT">
+        <COMMENT><![CDATA[Root element]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document DOMDocument xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Root element]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="32" END_LINE="162" LINES="2" START_COLUMN="12" START_LINE="161"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODELIST">
+      <COMMENT_FIRST_LINE><![CDATA[ Return a node list with parameter name child of DOMDocument xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return a node list with parameter name child of DOMDocument xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[DOMDocument xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Node name]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODELIST">
+        <COMMENT><![CDATA[List child nodes]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document DOMDocument xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Node name]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[List child nodes]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="33" END_LINE="172" LINES="3" START_COLUMN="12" START_LINE="170"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODELIST">
+      <COMMENT_FIRST_LINE><![CDATA[ Return a node list with all childs of node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return a node list with all childs of node
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE"/>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODELIST">
+        <COMMENT><![CDATA[List child nodes]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[List child nodes]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="33" END_LINE="180" LINES="2" START_COLUMN="12" START_LINE="179"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Get a node with parameter name, search in DOMDocument.]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Get a node with parameter name, search in DOMDocument.
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT">
+        <COMMENT><![CDATA[DOMDocument xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Node name]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Node DOMNode type. Many nodes... return first]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document DOMDocument xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Node name]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Node DOMNode type. Many nodes... return first]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="29" END_LINE="190" LINES="3" START_COLUMN="12" START_LINE="188"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Get a node with parameter name, search in DOMNode father.]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Get a node with parameter name, search in DOMNode father.
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DADNODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[DOMNode father]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Node name]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[Node DOMNode type. Many nodes... return first]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[dadNode DOMNode father]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Node name]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Node DOMNode type. Many nodes... return first]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="29" END_LINE="200" LINES="3" START_COLUMN="12" START_LINE="198"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETATTRIBUTE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value attribute of node type  DOMElement
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value attribute of node type  DOMElement
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOMELEMENT" TYPE="DBMS_XMLDOM.DOMELEMENT">
+        <COMMENT><![CDATA[node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMEATT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Attribute name]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Value of attribute]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[domElement node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameAtt Attribute name]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Value of attribute]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="210" LINES="3" START_COLUMN="12" START_LINE="208"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETATTRIBUTE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value attribute of node type DOMNode
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value attribute of node type DOMNode
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMEATT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Attribute name]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Value of attribute]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[node node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameAtt Attribute name]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Value of attribute]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="219" LINES="3" START_COLUMN="12" START_LINE="217"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNAME">
+      <COMMENT_FIRST_LINE><![CDATA[ Return name of node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return name of node
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[node]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name of node]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[node node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Name of node]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="226" LINES="2" START_COLUMN="12" START_LINE="225"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value of DOMNode like string
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value of DOMNode like string
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[DOMNode object]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Value of node]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[node DOMNode object]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Value of node]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="234" LINES="2" START_COLUMN="12" START_LINE="233"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUECDATA">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value of DOMNode with value in <![CDATA[...]]]]><![CDATA[> like CLOB
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value of DOMNode with value in <![CDATA[...]]]]><![CDATA[> like CLOB
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="NODE" TYPE="DBMS_XMLDOM.DOMNODE">
+        <COMMENT><![CDATA[DOMNode object]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="CLOB">
+        <COMMENT><![CDATA[Valur of node]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[node DOMNode object]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Valur of node]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="14" END_LINE="241" LINES="2" START_COLUMN="12" START_LINE="240"/>
+    </FUNCTION>
+    <FUNCTION NAME="DOMDOCUMENTTOXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return XMLTYPE for a DOMDocument xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return XMLTYPE for a DOMDocument xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="DOCUMENT" TYPE="DBMS_XMLDOM.DOMDOCUMENT"/>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[document]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="17" END_LINE="255" LINES="2" START_COLUMN="12" START_LINE="254"/>
+    </FUNCTION>
+    <FUNCTION NAME="XMLTYPETOCLOB">
+      <COMMENT_FIRST_LINE><![CDATA[ Return CLOB for a XMLTYPE xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return CLOB for a XMLTYPE xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE"/>
+      <RETURN TYPE="CLOB">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="14" END_LINE="262" LINES="2" START_COLUMN="12" START_LINE="261"/>
+    </FUNCTION>
+    <FUNCTION NAME="CLOBTOXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return XMLTYPE for a CLOB xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return XMLTYPE for a CLOB xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="CLOB"/>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="17" END_LINE="270" LINES="2" START_COLUMN="12" START_LINE="269"/>
+    </FUNCTION>
+    <FUNCTION NAME="SELECTTOXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return XMLTYPE represent value of select
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return XMLTYPE represent value of select
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="SELECTSQL" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Select SQL return values]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="NAMECONTAINERNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[name root node. IF not specify -> ROWSET]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="NAMEROWNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[name node for each row. IF not specify -> ROW]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml represent values of select]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[selectSql Select SQL return values]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameContainerNode name root node. IF not specify -> ROWSET]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameRowNode name node for each row. IF not specify -> ROW]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[xml represent values of select]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="17" END_LINE="282" LINES="4" START_COLUMN="12" START_LINE="279"/>
+    </FUNCTION>
+    <FUNCTION NAME="SELECTTOXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return XMLTYPE represent value table's rows search
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return XMLTYPE represent value table's rows search
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="TABLENAME" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name table search]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="WHERECLAUSE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Where clause]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMECONTAINERNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[name root node. IF not specify -> ROWSET]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMEROWNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[name node for each row. IF not specify -> ROW*]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="TCOLUMNSNODES" TYPE="T_COLUMNSNODES">
+        <COMMENT><![CDATA[Columns of table -> xml nodes]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TCOLUMNSATTRIBUTES" TYPE="T_COLUMNSATTRIBUTES">
+        <COMMENT><![CDATA[Columns of table -> xml attributes]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TCOLUMNSORDER" TYPE="T_COLUMNSNODES">
+        <COMMENT><![CDATA[Specific order columns]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml represent values of table's row]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tableName Name table search]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[whereClause Where clause]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameContainerNode name root node. IF not specify -> ROWSET]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameRowNode name node for each row. IF not specify -> ROW*]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tColumnsnodes Columns of table -> xml nodes]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tColumnsattributes Columns of table -> xml attributes]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tColumnsOrder Specific order columns]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[xml represent values of table's row]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="17" END_LINE="302" LINES="8" START_COLUMN="12" START_LINE="295"/>
+    </FUNCTION>
+    <FUNCTION NAME="FORMATXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Format indent XML
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Format indent XML
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="2" MODE="IN" NAME="IDENTSIZE" TYPE="PLS_INTEGER">
+        <COMMENT><![CDATA[Size of ident. Default 2]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT>
+        </COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[identSize Size of ident. Default 2]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT>
+        </COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="17" END_LINE="312" LINES="3" START_COLUMN="12" START_LINE="310"/>
+    </FUNCTION>
+    <PROCEDURE NAME="CREATENODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Create new Node in xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create new Node in xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml source and destination]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHDADNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for father node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name new node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </ARGUMENT>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml source and destination]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathDadNode  Name and path for father node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Name new node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="57" END_LINE="325" LINES="4" START_COLUMN="13" START_LINE="322"/>
+    </PROCEDURE>
+    <PROCEDURE NAME="CREATETEXTNODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Create new Node in xml with text value
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create new Node in xml with text value
+]]></COMMENT>
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml source and destination]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHDADNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for father node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name new node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="TEXT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Text value]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </ARGUMENT>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml source and destination]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathDadNode  Name and path for father node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Name new node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[text Text value]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="61" END_LINE="340" LINES="5" START_COLUMN="14" START_LINE="336"/>
+    </PROCEDURE>
+    <PROCEDURE NAME="CREATEATTRIBUTE">
+      <COMMENT_FIRST_LINE><![CDATA[ Create atrribute in node
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Create atrribute in node
+]]></COMMENT>
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml source and destination]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMEATT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name new attribute]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="VALUE" TYPE="VARCHAR2"/>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </ARGUMENT>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml source and destination]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathNode  Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameAtt Name new attribute]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xmlNode Will be child node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[value]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="63" END_LINE="356" LINES="5" START_COLUMN="14" START_LINE="352"/>
+    </PROCEDURE>
+    <PROCEDURE NAME="ADDNODEXMLTYPE">
+      <COMMENT_FIRST_LINE><![CDATA[ Add a node of structure XMLTYPE like child node in a XMLTYPE xml
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Add a node of structure XMLTYPE like child node in a XMLTYPE xml
+]]></COMMENT>
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml source and destination]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHDADNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for father node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name new root node of child node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="XMLNODE" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[Will be child node]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </ARGUMENT>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml source and destination]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathDadNode  Name and path for father node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode Name new root node of child node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xmlNode Will be child node]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="62" END_LINE="371" LINES="5" START_COLUMN="14" START_LINE="367"/>
+    </PROCEDURE>
+    <FUNCTION NAME="GETNODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Get a node for xmltype
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Get a node for xmltype
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="XMLTYPE">
+        <COMMENT><![CDATA[Node XMLType]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathNode Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Node XMLType]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="17" END_LINE="384" LINES="4" START_COLUMN="12" START_LINE="381"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETNODELIST">
+      <COMMENT_FIRST_LINE><![CDATA[ Return a cursor with select with all contain for node or nodes
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return a cursor with select with all contain for node or nodes
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="LISTCOLUMNS" TYPE="T_NODES">
+        <COMMENT><![CDATA[List of name and type nodes which return as columns]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="SYS_REFCURSOR">
+        <COMMENT><![CDATA[Cursor open ready for loop. Many nodes -> many rows. Mapping columns to the RECORD correct]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathNode Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[listColumns List of name and type nodes which return as columns]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Cursor open ready for loop. Many nodes -> many rows. Mapping columns to the RECORD correct]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="23" END_LINE="399" LINES="5" START_COLUMN="12" START_LINE="395"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETATTRIBUTE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value of attribute like string for xmltype
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value of attribute like string for xmltype
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHATT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for attribute value -> XQuery.
+      -Example value attribute: "//n:NODE_C/@att_1"]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Value of attribute]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathAtt Name and path for attribute value -> XQuery.
+      -Example value attribute: "//n:NODE_C/@att_1"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Value of attribute]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="412" LINES="4" START_COLUMN="12" START_LINE="409"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value of node like string for xmltype
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value of node like string for xmltype
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for node value -> XQuery.
+      -Example value node: "/n:NODE_A/NODE_B/NODE_C/text()" or " "/n:NODE_A/NODE_B/NODE_C"
+      (/text() will be automatically add)]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Value of node]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathNode Name and path for node value -> XQuery.
+      -Example value node: "/n:NODE_A/NODE_B/NODE_C/text()" or " "/n:NODE_A/NODE_B/NODE_C"
+      (/text() will be automatically add)]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Value of node]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="18" END_LINE="426" LINES="4" START_COLUMN="12" START_LINE="423"/>
+    </FUNCTION>
+    <FUNCTION NAME="GETVALUELARGE">
+      <COMMENT_FIRST_LINE><![CDATA[ Return value of node like CLOB (for large string in node) for xmltype
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Return value of node like CLOB (for large string in node) for xmltype
+]]></COMMENT>
+      <ARGUMENT MODE="IN" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHFATHERNODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[Name and path for node father -> XQuery.]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="NAMENODE" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[name object node.]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </ARGUMENT>
+      <RETURN TYPE="CLOB">
+        <COMMENT><![CDATA[Value of node]]></COMMENT>
+      </RETURN>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathFatherNode Name and path for node father -> XQuery.]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[nameNode name object node.]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@RETURN">
+        <COMMENT><![CDATA[Value of node]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="14" END_LINE="440" LINES="5" START_COLUMN="12" START_LINE="436"/>
+    </FUNCTION>
+    <PROCEDURE NAME="UPDATETEXTNODE">
+      <COMMENT_FIRST_LINE><![CDATA[ Update text value of node exists
+]]></COMMENT_FIRST_LINE>
+      <COMMENT><![CDATA[ Update text value of node exists
+]]></COMMENT>
+      <ARGUMENT MODE="IN OUT NOCOPY" NAME="XML" TYPE="XMLTYPE">
+        <COMMENT><![CDATA[xml source and destination]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT MODE="IN" NAME="PATHNODE" TYPE="VARCHAR2"/>
+      <ARGUMENT MODE="IN" NAME="TEXT" TYPE="VARCHAR2">
+        <COMMENT><![CDATA[New text value]]></COMMENT>
+      </ARGUMENT>
+      <ARGUMENT DEFAULT="NULL" MODE="IN" NAME="TNAMESPACES" TYPE="T_NAMESPACES">
+        <COMMENT><![CDATA[Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </ARGUMENT>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[xml xml source and destination]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[pathDadNode  Name and path for node -> XQuery.
+      -Example node: "/n:NODE_A/NODE_B/NODE_C"]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[text New text value]]></COMMENT>
+      </TAG>
+      <TAG TYPE="@PARAM">
+        <COMMENT><![CDATA[tNameSpaces Table with all necessary namespace. If not namespace -> NULL. Default NULL.*]]></COMMENT>
+      </TAG>
+      <SUMMARY END_COLUMN="60" END_LINE="453" LINES="4" START_COLUMN="13" START_LINE="450"/>
+    </PROCEDURE>
+    <SUMMARY END_COLUMN="12" END_LINE="459" LINES="459" START_COLUMN="27" START_LINE="1"/>
+  </PACKAGE>
+  <GENERATOR>
+    <OBJECTS>
+      <PROCESSED COUNT="2"/>
+      <SKIPPED COUNT="0"/>
+    </OBJECTS>
+    <CREATED DATE="21/11/19" TIME="13:14"/>
+    <SETTINGS DEFAULT_KEYWORDS_CASE="UPPER" DEFAULT_NAMES_CASE="UPPER" IGNORE_INFORMAL_COMMENTS="FALSE" INPUT_ENCODING="ISO-8859-15" KEYWORDS_TO_DEFAULT_CASE="TRUE" KEYWORDS_TO_LOWER_CASE="FALSE" KEYWORDS_TO_UPPER_CASE="FALSE" NAMES_TO_DEFAULT_CASE="TRUE" NAMES_TO_LOWER_CASE="FALSE" NAMES_TO_UPPER_CASE="FALSE" SHOW_SKIPPED_PACKAGES="FALSE" VERBOSE="FALSE"/>
+  </GENERATOR>
+</APPLICATION>
