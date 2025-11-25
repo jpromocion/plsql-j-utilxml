@@ -1,4 +1,7 @@
 # Package Utilxml
+![License: GPL 3.0](https://img.shields.io/badge/License-%20GPL%203.0-green.svg)
+![Oracle PLSQL](https://img.shields.io/badge/Oracle%20PLSQL-11r2%2B-orange)
+[![Donate PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/donate/?hosted_button_id=S2CX67ZD5C97C)
 
 Package plsql language for XML control functions.
 
